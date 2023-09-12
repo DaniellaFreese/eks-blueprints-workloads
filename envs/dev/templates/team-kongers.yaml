@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: team-kongers
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    namespace: team-kongers
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/DaniellaFreese/eks-blueprints-workloads.git
+    targetRevision: HEAD
+    path: teams/team-kongers
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
